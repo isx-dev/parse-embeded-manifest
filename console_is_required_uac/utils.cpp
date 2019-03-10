@@ -120,7 +120,8 @@ LPVOID WINAPI MapFile(__in LPCWSTR lpcwszFileName, __out_opt LPDWORD lpdwFileSiz
 	LPVOID lpBuffer;
 	IO_STATUS_BLOCK IoStatusBlock;
 
-	hFile = CreateFile(lpcwszFileName, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
+	// remove GENERIC_WRITE flag for access to system directory [edit]
+	hFile = CreateFile(lpcwszFileName, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	if (hFile == INVALID_HANDLE_VALUE)
